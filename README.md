@@ -5,7 +5,9 @@ A Vercel serverless functions wrapper for [@google-analytics/data](https://githu
 ## Usage
 
 API: `https://ga-functions.vercel.app/api/`
+
 METHOD: `POST`
+
 BODY: [data](#data)
 
 ### Data
@@ -26,7 +28,7 @@ BODY: [data](#data)
 
   Function name to call, there are `runReport`, `runPivotReport`, `runRealtimeReport`, `batchRunReports`, `batchRunPivotReport`
 
-- `func_args`
+- `func_args` - {any[]}
 
   Args for `func_name`
 
