@@ -1,0 +1,16 @@
+{
+  "name": "ga-functions",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "author": "KusStar",
+  "license": "MIT",
+  "devDependencies": {
+    "@vercel/node": "1.14.1"
+  },
+  "dependencies": {
+    "@google-analytics/data": "^2.8.0"
+  }
+}
