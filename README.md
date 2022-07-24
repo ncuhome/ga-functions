@@ -36,13 +36,43 @@ BODY: object
 
 More details, see [Google Analytics Data Documentation](https://developers.google.com/analytics/devguides/reporting/data/v1/quickstart-client-libraries)
 
+### Admin
+
+API: `/api/admin`
+
+METHOD: `POST`
+
+BODY: object
+
+- `project_id` - {string}
+
+  The project_id of your Google Cloud Platform API project
+
+- `client_email` - {string}
+
+  The client_email, which are in GOOGLE_APPLICATION_CREDENTIALS
+
+- `private_key` - {string}
+-
+  The private_key, which are in GOOGLE_APPLICATION_CREDENTIALS
+
+- `func_name` - {string}
+
+  Function name to call, there are `listAccounts`, `listProperties`...
+
+- `func_args` - {any[]}
+
+  Args for `func_name`
+
+More details, see [Google Analytics Admin Documentation](https://developers.google.com/analytics/devguides/config/admin/v1)
+
 ## Example
 
 ```ts
 import axios from 'axios'
 import 'dotenv/config'
 
-const url = 'https://ga-functions.vercel.app/api/'
+const url = 'https://ga-functions.vercel.app/api/data'
 
 axios.post(url, {
   data: {
