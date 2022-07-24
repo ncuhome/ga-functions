@@ -4,13 +4,15 @@ A Vercel serverless functions wrapper for [@google-analytics/data](https://githu
 
 ## Usage
 
-API: `https://ga-functions.vercel.app/api/`
+HOST: `https://ga-functions.vercel.app` or your self depoly host
+
+### Data
+
+API: `/api/data`
 
 METHOD: `POST`
 
-BODY: [data](#data)
-
-### Data
+BODY: object
 
 - `project_id` - {string}
 
