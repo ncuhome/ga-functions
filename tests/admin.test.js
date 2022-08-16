@@ -15,9 +15,14 @@ axios.post(`${API}/admin`, {
     project_id: GA_PROJECT_ID,
     client_email: GA_CLIENT_EMAIL,
     private_key: GA_PRIVATE_KEY,
-    func_name: 'listAccounts'
+    func_name: 'listAccountSummaries',
+    func_args: [
+      {
+        pageSize: 200
+      }
+    ]
   }
-}).then(res => res.data)
+}).then(res => res.data[0].propertySummaries)
   .then(console.log)
 
 axios.post(`${API}/admin`, {

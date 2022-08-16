@@ -1,5 +1,6 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
 import { AnalyticsAdminServiceClient } from '@google-analytics/admin';
+import { dlog } from '../utils/debug';
 
 export default async function (req: VercelRequest, res: VercelResponse) {
   const {
@@ -15,16 +16,17 @@ export default async function (req: VercelRequest, res: VercelResponse) {
     return
   }
 
-  const adminClient = new AnalyticsAdminServiceClient({
+  const client = new AnalyticsAdminServiceClient({
     projectId: project_id,
     credentials: {
       client_email,
-      private_key
-    }
+      private_key,
+    },
   })
 
   try {
-    const [response] = await adminClient[func_name](...func_args);
+    const [response] = await client[func_name](...func_args);
+    dlog(func_name, response)
     res.send(response)
   } catch (error) {
     console.error(error)
