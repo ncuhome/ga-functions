@@ -1,5 +1,8 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
+import { cache } from '../utils/cache';
+
+const dataKey = (id: string) => `data_${id}`
 
 export default async function (req: VercelRequest, res: VercelResponse) {
   const {
@@ -15,16 +18,24 @@ export default async function (req: VercelRequest, res: VercelResponse) {
     return
   }
 
-  const gaClient = new BetaAnalyticsDataClient({
-    projectId: project_id,
-    credentials: {
-      client_email,
-      private_key
-    }
-  })
+  const key = dataKey(project_id)
+
+  let client: BetaAnalyticsDataClient
+  if (cache.has(key)) {
+    client = cache.get(key)
+  } else {
+    client = new BetaAnalyticsDataClient({
+      projectId: project_id,
+      credentials: {
+        client_email,
+        private_key,
+      },
+    })
+    cache.set(key, client)
+  }
 
   try {
-    const [response] = await gaClient[func_name](...func_args);
+    const [response] = await client[func_name](...func_args);
     res.send(response)
   } catch (error) {
     console.error(error)

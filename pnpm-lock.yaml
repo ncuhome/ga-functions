@@ -9,11 +9,13 @@ specifiers:
   axios: ^0.27.2
   debug: ^4.3.4
   dotenv: ^16.0.1
+  tmp-cache: ^1.1.0
 
 dependencies:
   '@google-analytics/admin': 4.2.0
   '@google-analytics/data': 2.8.0
   debug: 4.3.4
+  tmp-cache: 1.1.0
 
 devDependencies:
   '@types/object-hash': 2.2.1
@@ -1139,6 +1141,11 @@ packages:
 
   /taffydb/2.6.2:
     resolution: {integrity: sha512-y3JaeRSplks6NYQuCOj3ZFMO3j60rTwbuKCvZxsAraGYH2epusatvZ0baZYA01WsGqJBq/Dl6vOrMUJqyMj8kA==}
+    dev: false
+
+  /tmp-cache/1.1.0:
+    resolution: {integrity: sha512-j040fkL/x+XAZQ9K3bKGEPwgYhOZNBQLa3NXEADUiuno9C+3N2JJA4bVPDREixp604G3/vTXWA3DIPpA9lu1RQ==}
+    engines: {node: '>=6'}
     dev: false
 
   /tmp/0.2.1:

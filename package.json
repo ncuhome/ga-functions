@@ -18,6 +18,7 @@
   "dependencies": {
     "@google-analytics/admin": "^4.2.0",
     "@google-analytics/data": "^2.8.0",
-    "debug": "^4.3.4"
+    "debug": "^4.3.4",
+    "tmp-cache": "^1.1.0"
   }
 }

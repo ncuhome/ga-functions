@@ -1,6 +1,9 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
 import { AnalyticsAdminServiceClient } from '@google-analytics/admin';
 import { dlog } from '../utils/debug';
+import { cache } from '../utils/cache';
+
+const adminKey = (id: string) => `admin_${id}`
 
 export default async function (req: VercelRequest, res: VercelResponse) {
   const {
@@ -16,13 +19,22 @@ export default async function (req: VercelRequest, res: VercelResponse) {
     return
   }
 
-  const client = new AnalyticsAdminServiceClient({
-    projectId: project_id,
-    credentials: {
-      client_email,
-      private_key,
-    },
-  })
+
+  const key = adminKey(project_id)
+
+  let client: AnalyticsAdminServiceClient
+  if (cache.has(key)) {
+    client = cache.get(key)
+  } else {
+    client = new AnalyticsAdminServiceClient({
+      projectId: project_id,
+      credentials: {
+        client_email,
+        private_key,
+      },
+    })
+    cache.set(key, client)
+  }
 
   try {
     const [response] = await client[func_name](...func_args);
