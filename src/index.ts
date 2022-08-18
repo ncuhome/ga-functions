@@ -6,7 +6,7 @@ type PickMatching<T, V> =
   { [K in keyof T as T[K] extends V ? K : never]: T[K] }
 type ExtractMethods<T> = PickMatching<T, Function>;
 
-type ParamType<T> = T extends (...args: infer U) => any ? Partial<U> : never
+type ParamType<T> = T extends (...args: infer U) => any ? U : never
 
 type ToOmit = 'initialize' | 'warn' | 'close'
 
@@ -40,7 +40,7 @@ export interface Env {
 
 export const GA_API = 'https://ga-functions.vercel.app/api'
 
-export const adminFetch = <FuncName extends keyof AllAdminFuncs, K extends ParamType<AllAdminFuncs[FuncName]>, R extends ResponeType<AllAdminFuncs[FuncName]>>(func_name: FuncName, func_args: K, env: Env) => {
+export const adminFetch = <FuncName extends keyof AllAdminFuncs, K extends ParamType<AllAdminFuncs[FuncName]>, R extends ResponeType<AllAdminFuncs[FuncName]>>(func_name: FuncName, func_args: Partial<K>, env: Env) => {
   const {
     project_id,
     client_email,
