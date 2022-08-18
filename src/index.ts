@@ -57,7 +57,7 @@ export const adminFetch = <FuncName extends keyof AllAdminFuncs, K extends Param
   })
 }
 
-export const dataFetch = <T extends keyof AllDataFuncs, K extends ParamType<AllDataFuncs[T]>, R extends ResponeType<AllDataFuncs[T]>>(func_name: T, func_args: K, env: Env) => {
+export const dataFetch = <T extends keyof AllDataFuncs, K extends ParamType<AllDataFuncs[T]>, R extends ResponeType<AllDataFuncs[T]>>(func_name: T, func_args: Partial<K>, env: Env) => {
   const {
     project_id,
     client_email,
