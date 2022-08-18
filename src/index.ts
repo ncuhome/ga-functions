@@ -1,12 +1,12 @@
 import axios from 'axios'
-import { AnalyticsAdminServiceClient } from '@google-analytics/admin'
-import { BetaAnalyticsDataClient } from '@google-analytics/data'
+import type { AnalyticsAdminServiceClient } from '@google-analytics/admin'
+import type { BetaAnalyticsDataClient } from '@google-analytics/data'
 
 type PickMatching<T, V> =
   { [K in keyof T as T[K] extends V ? K : never]: T[K] }
 type ExtractMethods<T> = PickMatching<T, Function>;
 
-type ParamType<T> = T extends (...args: infer U) => any ? U : never
+type ParamType<T> = T extends (...args: infer U) => any ? Partial<U> : never
 type CallReturnType<T> = T extends (...args: any[]) => infer R ? R : T
 
 type ToOmit = 'initialize' | 'warn' | 'close'
