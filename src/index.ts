@@ -13,7 +13,24 @@ type ToOmit = 'initialize' | 'warn' | 'close'
 export type AllAdminFuncs = Omit<ExtractMethods<AnalyticsAdminServiceClient>, ToOmit>
 export type AllDataFuncs = Omit<ExtractMethods<BetaAnalyticsDataClient>, ToOmit>
 
-type ResponeType<T extends any[]> = T[0]
+type OverloadedReturnType<T> =
+  T extends { (...args: any[]): infer R; (...args: any[]): infer R; (...args: any[]): infer R; (...args: any[]): infer R } ? R :
+  T extends { (...args: any[]): infer R; (...args: any[]): infer R; (...args: any[]): infer R } ? R :
+  T extends { (...args: any[]): infer R; (...args: any[]): infer R } ? R :
+  T extends (...args: any[]) => infer R ? R : any
+
+type Awaited<T> =
+  T extends null | undefined ? T : // special case for `null | undefined` when not in `--strictNullChecks` mode
+  T extends object & { then(onfulfilled: infer F): any } ? // `await` only unwraps object types with a callable `then`. Non-object types are not unwrapped
+  F extends ((value: infer V, ...args: any) => any) ? // if the argument to `then` is callable, extracts the first argument
+  Awaited<V> : // recursively unwrap the value
+  never : // the argument to `then` was not callable
+  T; // non-object or non-thenable
+
+type PickFirst<T> = T extends any[] ? T[0] : T
+
+type ResponeType<T = any> = PickFirst<Awaited<Exclude<OverloadedReturnType<T>, void>>>
+
 
 export interface Env {
   project_id: string
@@ -23,13 +40,13 @@ export interface Env {
 
 export const GA_API = 'https://ga-functions.vercel.app/api'
 
-export const adminFetch = <T extends keyof AllAdminFuncs, K extends ParamType<AllAdminFuncs[T]>>(func_name: T, func_args: K, env: Env) => {
+export const adminFetch = <FuncName extends keyof AllAdminFuncs, K extends ParamType<AllAdminFuncs[FuncName]>, R extends ResponeType<AllAdminFuncs[FuncName]>>(func_name: FuncName, func_args: K, env: Env) => {
   const {
     project_id,
     client_email,
     private_key,
   } = env
-  return axios.post<ResponeType<K>>(`${GA_API}/admin`, {
+  return axios.post<R>(`${GA_API}/admin`, {
     data: {
       project_id,
       client_email,
@@ -40,13 +57,13 @@ export const adminFetch = <T extends keyof AllAdminFuncs, K extends ParamType<Al
   })
 }
 
-export const dataFetch = <T extends keyof AllDataFuncs, K extends ParamType<AllDataFuncs[T]>>(func_name: T, func_args: K, env: Env) => {
+export const dataFetch = <T extends keyof AllDataFuncs, K extends ParamType<AllDataFuncs[T]>, R extends ResponeType<AllDataFuncs[T]>>(func_name: T, func_args: K, env: Env) => {
   const {
     project_id,
     client_email,
     private_key,
   } = env
-  return axios.post<ResponeType<K>>(`${GA_API}/data`, {
+  return axios.post<R>(`${GA_API}/data`, {
     data: {
       project_id,
       client_email,
