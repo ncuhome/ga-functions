@@ -38,7 +38,17 @@ export interface Env {
   private_key: string
 }
 
-export const GA_API = 'https://ga-functions.vercel.app/api'
+export const DEFAULTS = {
+  GA_API: 'https://ga-functions.vercel.app/api'
+}
+
+/**
+ * set default GA_API url
+ * @default 'https://ga-functions.vercel.app/api'
+ */
+export const setGAURL = (url: string) => {
+  DEFAULTS.GA_API = url
+}
 
 export const adminFetch = <FuncName extends keyof AllAdminFuncs, K extends ParamType<AllAdminFuncs[FuncName]>, R extends ResponeType<AllAdminFuncs[FuncName]>>(func_name: FuncName, func_args: Partial<K>, env: Env) => {
   const {
@@ -46,7 +56,7 @@ export const adminFetch = <FuncName extends keyof AllAdminFuncs, K extends Param
     client_email,
     private_key,
   } = env
-  return axios.post<R>(`${GA_API}/admin`, {
+  return axios.post<R>(`${DEFAULTS.GA_API}/admin`, {
     data: {
       project_id,
       client_email,
@@ -63,7 +73,7 @@ export const dataFetch = <T extends keyof AllDataFuncs, K extends ParamType<AllD
     client_email,
     private_key,
   } = env
-  return axios.post<R>(`${GA_API}/data`, {
+  return axios.post<R>(`${DEFAULTS.GA_API}/data`, {
     data: {
       project_id,
       client_email,
