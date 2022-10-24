@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@google-analytics/admin': ^4.2.0
-  '@google-analytics/data': ^3.0.0
+  '@google-analytics/data': ^3.1.0
   '@types/object-hash': ^2.2.1
   '@vercel/build-utils': ^5.3.1
   '@vercel/node': 2.5.8
@@ -14,7 +14,7 @@ specifiers:
 
 dependencies:
   '@google-analytics/admin': 4.2.0
-  '@google-analytics/data': 3.0.0
+  '@google-analytics/data': 3.1.0
 
 devDependencies:
   '@types/object-hash': 2.2.1
@@ -83,25 +83,25 @@ packages:
     engines: {node: '>=12.0.0'}
     dependencies:
       google-auth-library: 8.2.0
-      google-gax: 3.2.0
+      google-gax: 3.5.2
       server-destroy: 1.0.1
     transitivePeerDependencies:
       - encoding
       - supports-color
     dev: false
 
-  /@google-analytics/data/3.0.0:
-    resolution: {integrity: sha512-pRXSjQXKTn4c3ZCZdqCj1eK3DmkkujMZa/3ATVVo701STkGk8SybrCHcXRkLhI/kPM8taPcW+nvQfahwxiyRMw==}
+  /@google-analytics/data/3.1.0:
+    resolution: {integrity: sha512-nOoZmdz9lrExMpsauZG2exjIgcMzywgpCnrnRhisUiZtqI/XpaS+4AIxMhZAqN3aX0zkYKlsD0feONiRR7Iyew==}
     engines: {node: '>=12.0.0'}
     dependencies:
-      google-gax: 3.2.0
+      google-gax: 3.5.2
     transitivePeerDependencies:
       - encoding
       - supports-color
     dev: false
 
-  /@grpc/grpc-js/1.6.10:
-    resolution: {integrity: sha512-XTX5z/P5kH802MDoVm/rqOil0UwYEOEjf9+NPgfmm5UINIxDzwYaXfVR6z8svCBG8Hlbu/FzkXqhP8J5xaWzSQ==}
+  /@grpc/grpc-js/1.7.3:
+    resolution: {integrity: sha512-H9l79u4kJ2PVSxUNA08HMYAnUBLj9v6KjYQ7SQ71hOZcEXhShE/y5iQCesP8+6/Ik/7i2O0a10bPquIcYfufog==}
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.2
@@ -1252,12 +1252,12 @@ packages:
       - supports-color
     dev: false
 
-  /google-gax/3.2.0:
-    resolution: {integrity: sha512-DvzjDFgs9/PI45wkQKRxv3ICg7jx44EGmpzJ8lRTbHpvrWfovnvTbOGDDtRm3fMWJQTeJO01huA9U/bNVd2i5w==}
+  /google-gax/3.5.2:
+    resolution: {integrity: sha512-AyP53w0gHcWlzxm+jSgqCR3Xu4Ld7EpSjhtNBnNhzwwWaIUyphH9kBGNIEH+i4UGkTUXOY29K/Re8EiAvkBRGw==}
     engines: {node: '>=12'}
     hasBin: true
     dependencies:
-      '@grpc/grpc-js': 1.6.10
+      '@grpc/grpc-js': 1.7.3
       '@grpc/proto-loader': 0.7.2
       '@types/long': 4.0.2
       abort-controller: 3.0.0
@@ -1268,8 +1268,8 @@ packages:
       node-fetch: 2.6.7
       object-hash: 3.0.0
       proto3-json-serializer: 1.0.3
-      protobufjs: 7.0.0
-      protobufjs-cli: 1.0.0_protobufjs@7.0.0
+      protobufjs: 7.1.2
+      protobufjs-cli: 1.0.2_protobufjs@7.1.2
       retry-request: 5.0.1
     transitivePeerDependencies:
       - encoding
@@ -1751,8 +1751,8 @@ packages:
       protobufjs: 7.0.0
     dev: false
 
-  /protobufjs-cli/1.0.0_protobufjs@7.0.0:
-    resolution: {integrity: sha512-7NZEBrFuuU2ZdzlhmAmvh8fdU7A4OFhzYX9AB7a5vXjopAeiks6ZgUSjOlOO7ItCDJQm3y9RWjk7spUbHc4X0w==}
+  /protobufjs-cli/1.0.2_protobufjs@7.1.2:
+    resolution: {integrity: sha512-cz9Pq9p/Zs7okc6avH20W7QuyjTclwJPgqXG11jNaulfS3nbVisID8rC+prfgq0gbZE0w9LBFd1OKFF03kgFzg==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     peerDependencies:
@@ -1765,7 +1765,7 @@ packages:
       glob: 8.0.3
       jsdoc: 3.6.11
       minimist: 1.2.6
-      protobufjs: 7.0.0
+      protobufjs: 7.1.2
       semver: 7.3.7
       tmp: 0.2.1
       uglify-js: 3.17.0
@@ -1787,6 +1787,25 @@ packages:
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
       '@types/long': 4.0.2
+      '@types/node': 18.7.6
+      long: 5.2.0
+    dev: false
+
+  /protobufjs/7.1.2:
+    resolution: {integrity: sha512-4ZPTPkXCdel3+L81yw3dG6+Kq3umdWKh7Dc7GW/CpNk4SX3hK58iPCWeCyhVTDrbkNeKrYNZ7EojM5WDaEWTLQ==}
+    engines: {node: '>=12.0.0'}
+    requiresBuild: true
+    dependencies:
+      '@protobufjs/aspromise': 1.1.2
+      '@protobufjs/base64': 1.1.2
+      '@protobufjs/codegen': 2.0.4
+      '@protobufjs/eventemitter': 1.1.0
+      '@protobufjs/fetch': 1.1.0
+      '@protobufjs/float': 1.0.2
+      '@protobufjs/inquire': 1.1.0
+      '@protobufjs/path': 1.1.2
+      '@protobufjs/pool': 1.1.0
+      '@protobufjs/utf8': 1.1.0
       '@types/node': 18.7.6
       long: 5.2.0
     dev: false

@@ -5,7 +5,7 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
-    "start": "DEBUG=ga-functions vercel dev",
+    "start": "DEBUG=ga-functions vercel dev --listen 3000",
     "deploy": "vercel --prod",
     "test:admin": "node tests/admin.test",
     "npm:build": "tsup src/index.ts --dts --format esm,cjs",
@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@google-analytics/admin": "^4.2.0",
-    "@google-analytics/data": "^3.0.0"
+    "@google-analytics/data": "^3.1.0"
   },
   "peerDependencies": {
     "axios": ">=20"
