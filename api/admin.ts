@@ -15,7 +15,7 @@ export default async function (req: VercelRequest, res: VercelResponse) {
   } = req.body?.data || {}
 
   if (!project_id || !client_email || !private_key || !func_name) {
-    res.status(200).send('Missing required parameters')
+    res.status(403).send('Missing required parameters')
     return
   }
 
